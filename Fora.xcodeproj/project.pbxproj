@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C1206BEE21A5C2F90089CCED /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1206BED21A5C2F90089CCED /* Extension.swift */; };
 		C13AB1A921A47BDC002D4D0E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13AB1A821A47BDC002D4D0E /* MainViewController.swift */; };
 		C13AB1AD21A47D02002D4D0E /* FilmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13AB1AC21A47D02002D4D0E /* FilmCollectionViewCell.swift */; };
 		C13AB1AF21A489E8002D4D0E /* AlbumDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13AB1AE21A489E8002D4D0E /* AlbumDetailTableViewController.swift */; };
@@ -22,7 +21,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C1206BED21A5C2F90089CCED /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		C13AB1A821A47BDC002D4D0E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C13AB1AC21A47D02002D4D0E /* FilmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCollectionViewCell.swift; sourceTree = "<group>"; };
 		C13AB1AE21A489E8002D4D0E /* AlbumDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -80,7 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				C13AB1B021A4BB45002D4D0E /* NetworkManager.swift */,
-				C1206BED21A5C2F90089CCED /* Extension.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -195,7 +192,6 @@
 				C1C5D56321A459D100D44F7F /* AppDelegate.swift in Sources */,
 				C13AB1AF21A489E8002D4D0E /* AlbumDetailTableViewController.swift in Sources */,
 				C13AB1AD21A47D02002D4D0E /* FilmCollectionViewCell.swift in Sources */,
-				C1206BEE21A5C2F90089CCED /* Extension.swift in Sources */,
 				C1C5D56B21A459D200D44F7F /* Fora.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

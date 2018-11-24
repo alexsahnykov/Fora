@@ -76,21 +76,47 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if searchBar.text != nil || searchBar.text != "" {
+        if !searchBar.text!.trimmingCharacters(in: .whitespaces).isEmpty  {
             self.searchActivity.isHidden = false
             self.searchActivity.startAnimating()
             self.searchingAlbums.removeAll()
-            networkManager.fetchSearchingAlbums(searchAlbum: searchBar.text!) { (albums) in
-                self.searchingAlbums = albums.results.sorted(by: {$0.collectionName! < $1.collectionName!})
-                DispatchQueue.main.async {
-                    self.collectionVIew.reloadData()
-                    self.collectionVIew.setContentOffset(CGPoint(x:0,y:0), animated: false)
-                    self.searchActivity.isHidden = true
-                    self.searchActivity.stopAnimating()
+            networkManager.fetchSearchingAlbums(endpoint: .searchAlbums(albumName: searchBar.text!)) { (albums) in
+                if albums.results.isEmpty {
+                    self.noResultPage()
+                } else {
+                    self.searchResult(albumsSearchResult: albums)
                 }
             }
+        } else {
+            return
         }
         searchBar.resignFirstResponder()
     }
     
+    func  noResultPage() {
+        DispatchQueue.main.async {
+            self.searchActivity.isHidden = true
+            self.searchActivity.stopAnimating()
+            self.collectionVIew.reloadData()
+            self.collectionVIew.setContentOffset(CGPoint(x:0,y:0), animated: false)
+            let noDataLablePosition = CGRect(x: 0,y: 0,width: self.collectionVIew.bounds.size.width,height: self.collectionVIew.bounds.size.height)
+            let noDataLabel: UILabel = UILabel(frame: noDataLablePosition)
+            noDataLabel.text = "No search result  :("
+            noDataLabel.textAlignment = .center
+            noDataLabel.textColor = UIColor.gray
+            noDataLabel.sizeToFit()
+            self.collectionVIew.backgroundView = noDataLabel
+        }
+    }
+    
+    func searchResult(albumsSearchResult:Albums)  {
+        self.searchingAlbums = albumsSearchResult.results.sorted(by: {$0.collectionName! < $1.collectionName!})
+        DispatchQueue.main.async {
+            self.collectionVIew.backgroundView = nil
+            self.collectionVIew.reloadData()
+            self.collectionVIew.setContentOffset(CGPoint(x:0,y:0), animated: false)
+            self.searchActivity.isHidden = true
+            self.searchActivity.stopAnimating()
+        }
+    }
 }

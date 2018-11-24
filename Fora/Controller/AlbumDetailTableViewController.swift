@@ -56,7 +56,7 @@ class AlbumDetailTableViewController: UITableViewController {
     // MARK: - Fetch
     
     private  func fetchTracks() {
-        networkManager.fetchAlbumTracks(albumID:String(albumDetail.collectionId!)) { tracks in
+        networkManager.fetchAlbumTracks(endpoint:.getAlbumTracks(albumId: String(albumDetail.collectionId!))) { tracks in
             self.albumTracks = tracks.results
             self.albumTracks.removeFirst()
             DispatchQueue.main.async {

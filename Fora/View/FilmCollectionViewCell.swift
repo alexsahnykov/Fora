@@ -17,18 +17,17 @@ class FilmCollectionViewCell: UICollectionViewCell {
     func updateCell (album: Album) {
         albumTitleLable.text = album.collectionName
         albumArtistLable.text = album.artistName
-        activityView.startAnimating()
         fileImage.image = nil
+        activityView.startAnimating()
         guard let url = album.artworkUrl100 else {return}
-        let imageUrl = URL(string: url)
-        DispatchQueue.global().async {
-            if let imageData = try? Data(contentsOf: imageUrl!) {
-                DispatchQueue.main.async {
-                    self.fileImage.image = UIImage(data: imageData)
-                    self.activityView.stopAnimating()
-                    self.activityView.isHidden = true
-                }
+        networkManager.downloadImage(url: url) { (image) in
+            DispatchQueue.main.async {
+                self.fileImage.image = image
+                self.activityView.stopAnimating()
+                self.activityView.isHidden = true
             }
+            
         }
     }
 }
+
