@@ -19,6 +19,7 @@ class FilmCollectionViewCell: UICollectionViewCell {
         albumArtistLable.text = album.artistName
         fileImage.image = nil
         activityView.startAnimating()
+        self.activityView.isHidden = false
         guard let url = album.artworkUrl100 else {return}
         networkManager.downloadImage(url: url) { (image) in
             DispatchQueue.main.async {

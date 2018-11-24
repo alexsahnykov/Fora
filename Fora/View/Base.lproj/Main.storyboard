@@ -134,7 +134,6 @@
                         <outlet property="collectionVIew" destination="u0Y-j8-7YR" id="PWK-4F-A5b"/>
                         <outlet property="searchActivity" destination="aIE-Nl-Zn1" id="fJG-6g-cd4"/>
                         <outlet property="searchBar" destination="yXg-ba-Rct" id="Sno-cl-gPP"/>
-                        <segue destination="gNo-sF-EMF" kind="show" identifier="showDetail" id="KHV-aD-4Ik"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R4v-eq-tUO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -144,7 +143,7 @@
         <!--Album Detail Table View Controller-->
         <scene sceneID="4AJ-UT-L91">
             <objects>
-                <tableViewController id="gNo-sF-EMF" customClass="AlbumDetailTableViewController" customModule="Fora" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="albumInfo" id="gNo-sF-EMF" customClass="AlbumDetailTableViewController" customModule="Fora" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="auf-DR-1y1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -184,6 +183,9 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oTB-hq-mB2">
+                                    <rect key="frame" x="78" y="78" width="20" height="20"/>
+                                </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -198,7 +200,9 @@
                                 <constraint firstAttribute="trailing" secondItem="sfF-8E-BUS" secondAttribute="trailing" constant="8" id="m5h-4f-Bkn"/>
                                 <constraint firstItem="N8J-g0-bf7" firstAttribute="leading" secondItem="guB-ES-eNA" secondAttribute="leading" constant="8" id="pVC-Cc-DAV"/>
                                 <constraint firstItem="cPv-AZ-zDH" firstAttribute="leading" secondItem="N8J-g0-bf7" secondAttribute="trailing" constant="8" id="qIp-X5-Vwk"/>
+                                <constraint firstItem="oTB-hq-mB2" firstAttribute="centerX" secondItem="N8J-g0-bf7" secondAttribute="centerX" id="rEY-At-2FK"/>
                                 <constraint firstItem="gvT-gK-few" firstAttribute="top" secondItem="guB-ES-eNA" secondAttribute="top" constant="8" id="rcY-hr-DXb"/>
+                                <constraint firstItem="oTB-hq-mB2" firstAttribute="centerY" secondItem="N8J-g0-bf7" secondAttribute="centerY" id="tK0-90-tdV"/>
                                 <constraint firstItem="XVN-1o-dpX" firstAttribute="leading" secondItem="N8J-g0-bf7" secondAttribute="trailing" constant="8" id="tQX-PB-K1y"/>
                                 <constraint firstAttribute="trailing" secondItem="cPv-AZ-zDH" secondAttribute="trailing" constant="8" id="xwx-OM-t3W"/>
                             </constraints>
@@ -247,6 +251,7 @@
                     </tableView>
                     <connections>
                         <outlet property="albumImage" destination="N8J-g0-bf7" id="ip2-Hd-oSI"/>
+                        <outlet property="albumImageActivityView" destination="oTB-hq-mB2" id="qhk-2U-c04"/>
                         <outlet property="albumLable" destination="sfF-8E-BUS" id="wXb-rd-ubk"/>
                         <outlet property="artistLable" destination="gvT-gK-few" id="NLx-4X-FIl"/>
                         <outlet property="countryLable" destination="XVN-1o-dpX" id="AjS-II-ch6"/>

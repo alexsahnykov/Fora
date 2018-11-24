@@ -15,12 +15,13 @@ class AlbumDetailTableViewController: UITableViewController {
     
     var albumTracks = [Track]()
     var albumDetail:Album!
-    var image = UIImage()
+    
     
     let loadingView = UIView()
     let spinner = UIActivityIndicatorView()
     let loadingLabel = UILabel()
     
+    @IBOutlet weak var albumImageActivityView: UIActivityIndicatorView!
     @IBOutlet weak var albumImage: UIImageView!
     @IBOutlet weak var artistLable: UILabel!
     @IBOutlet weak var albumLable: UILabel!
@@ -36,6 +37,7 @@ class AlbumDetailTableViewController: UITableViewController {
         setLables(album: albumDetail)
         setLoadingScreen()
         fetchTracks()
+        setAlbumImage()
     }
     
     
@@ -64,23 +66,31 @@ class AlbumDetailTableViewController: UITableViewController {
                 self.removeLoadingScreen()
             }
         }
-        
     }
     
     // MARK: - UI
+    
+    func setAlbumImage() {
+        albumImageActivityView.isHidden = false
+        albumImageActivityView.startAnimating()
+        networkManager.downloadImage(url: albumDetail.artworkUrl100!) { (image) in
+            DispatchQueue.main.async {
+                self.albumImage.image = image
+                self.albumImageActivityView.isHidden = true
+                self.albumImageActivityView.stopAnimating()
+            }
+        }
+    }
     
     func  setLables (album:Album) {
         artistLable.text = album.artistName
         albumLable.text = album.collectionName
         countryLable.text = album.country
         dateLable.text = album.releaseDate
-        albumImage.image = image
     }
     
     
     private func removeLoadingScreen() {
-        
-        // Hides and stops the text and the spinner
         spinner.stopAnimating()
         spinner.isHidden = true
         loadingLabel.isHidden = true
@@ -88,27 +98,10 @@ class AlbumDetailTableViewController: UITableViewController {
     }
     private func setLoadingScreen() {
         self.tableView.separatorColor = .white
-        // Sets the view which contains the loading text and the spinner
-        let width: CGFloat = 120
-        let height: CGFloat = 30
-        let x = (tableView.frame.width / 2) - (width / 2)
-        let y = (tableView.frame.height / 2) - (height / 2) - (navigationController?.navigationBar.frame.height)!
-        loadingView.frame = CGRect(x: x, y: y, width: width, height: height)
-        
-        // Sets loading text
-        loadingLabel.textColor = .gray
-        loadingLabel.textAlignment = .center
-        loadingLabel.text = "Загрузка..."
-        loadingLabel.frame = CGRect(x: 0, y: 0, width: 140, height: 30)
-        
-        // Sets spinner
+        loadingView.frame = CGRect(x: tableView.frame.width / 2, y: tableView.frame.height / 2, width: tableView.frame.width, height: tableView.frame.height)
         spinner.style = .gray
-        spinner.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         spinner.startAnimating()
-        
-        // Adds text and spinner to the view
         loadingView.addSubview(spinner)
-        loadingView.addSubview(loadingLabel)
         tableView.addSubview(loadingView)
     }
 }

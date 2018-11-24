@@ -15,8 +15,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     var searchingAlbums =  [Album]()
-    var albumInfo :Album?
-    var albumImage: UIImage?
     
     @IBOutlet weak var searchActivity: UIActivityIndicatorView!
     @IBOutlet weak var collectionVIew: UICollectionView!
@@ -52,25 +50,14 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let albumForSegue = searchingAlbums[indexPath.row]
-        let cell = collectionView.cellForItem(at: indexPath) as! FilmCollectionViewCell
-        albumImage = cell.fileImage.image
-        self.albumInfo = albumForSegue
-        self.performSegue(withIdentifier: "showDetail", sender: self)
+        let aboutVc = storyboard?.instantiateViewController(withIdentifier: "albumInfo") as! AlbumDetailTableViewController
+        aboutVc.albumDetail = albumForSegue
+        self.navigationController?.pushViewController(aboutVc, animated: true)
         searchBar.resignFirstResponder()
     }
    
     
-    // MARK: - CollectionView methods
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "showDetail"){
-           if let destinationVC = segue.destination as? AlbumDetailTableViewController {
-            destinationVC.albumDetail = self.albumInfo
-            destinationVC.image = albumImage!
-        }
-    }
-    }
+
     
       // MARK: - SearchView methods
     
