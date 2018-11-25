@@ -110,8 +110,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>
-                                    <outlet property="dataSource" destination="JFT-HL-k99" id="F2a-Bz-yKD"/>
-                                    <outlet property="delegate" destination="JFT-HL-k99" id="XKr-X4-xvZ"/>
+                                    <outlet property="dataSource" destination="JFT-HL-k99" id="rtY-XB-tlT"/>
+                                    <outlet property="delegate" destination="JFT-HL-k99" id="eyz-g7-zOe"/>
                                 </connections>
                             </collectionView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="aIE-Nl-Zn1">
@@ -186,9 +186,6 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oTB-hq-mB2">
-                                    <rect key="frame" x="78" y="78" width="20" height="20"/>
-                                </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -203,9 +200,7 @@
                                 <constraint firstAttribute="trailing" secondItem="sfF-8E-BUS" secondAttribute="trailing" constant="8" id="m5h-4f-Bkn"/>
                                 <constraint firstItem="N8J-g0-bf7" firstAttribute="leading" secondItem="guB-ES-eNA" secondAttribute="leading" constant="8" id="pVC-Cc-DAV"/>
                                 <constraint firstItem="cPv-AZ-zDH" firstAttribute="leading" secondItem="N8J-g0-bf7" secondAttribute="trailing" constant="8" id="qIp-X5-Vwk"/>
-                                <constraint firstItem="oTB-hq-mB2" firstAttribute="centerX" secondItem="N8J-g0-bf7" secondAttribute="centerX" id="rEY-At-2FK"/>
                                 <constraint firstItem="gvT-gK-few" firstAttribute="top" secondItem="guB-ES-eNA" secondAttribute="top" constant="8" id="rcY-hr-DXb"/>
-                                <constraint firstItem="oTB-hq-mB2" firstAttribute="centerY" secondItem="N8J-g0-bf7" secondAttribute="centerY" id="tK0-90-tdV"/>
                                 <constraint firstItem="XVN-1o-dpX" firstAttribute="leading" secondItem="N8J-g0-bf7" secondAttribute="trailing" constant="8" id="tQX-PB-K1y"/>
                                 <constraint firstAttribute="trailing" secondItem="cPv-AZ-zDH" secondAttribute="trailing" constant="8" id="xwx-OM-t3W"/>
                             </constraints>
@@ -254,7 +249,6 @@
                     </tableView>
                     <connections>
                         <outlet property="albumImage" destination="N8J-g0-bf7" id="ip2-Hd-oSI"/>
-                        <outlet property="albumImageActivityView" destination="oTB-hq-mB2" id="qhk-2U-c04"/>
                         <outlet property="albumLable" destination="sfF-8E-BUS" id="wXb-rd-ubk"/>
                         <outlet property="artistLable" destination="gvT-gK-few" id="NLx-4X-FIl"/>
                         <outlet property="countryLable" destination="XVN-1o-dpX" id="AjS-II-ch6"/>

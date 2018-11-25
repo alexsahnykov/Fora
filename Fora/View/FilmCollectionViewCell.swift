@@ -9,6 +9,14 @@
 import UIKit
 
 class FilmCollectionViewCell: UICollectionViewCell {
+    var image: UIImage? {
+        didSet{
+            fileImage.image = image
+            activityView.stopAnimating()
+            activityView.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var fileImage: UIImageView!
     @IBOutlet weak var albumTitleLable: UILabel!
     @IBOutlet weak var albumArtistLable: UILabel!
@@ -17,18 +25,9 @@ class FilmCollectionViewCell: UICollectionViewCell {
     func updateCell (album: Album) {
         albumTitleLable.text = album.collectionName
         albumArtistLable.text = album.artistName
-        fileImage.image = nil
         activityView.startAnimating()
-        self.activityView.isHidden = false
-        guard let url = album.artworkUrl100 else {return}
-        networkManager.fetchImage(url: url) { (image) in
-            DispatchQueue.main.async {
-                self.fileImage.image = image
-                self.activityView.stopAnimating()
-                self.activityView.isHidden = true
-            }
-            
-        }
+        activityView.isHidden = false
     }
 }
+
 

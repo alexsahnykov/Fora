@@ -8,22 +8,18 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
-    
+class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    
     var searchingAlbums =  [Album]()
+    let dataProvider = DataProvider()
     
     @IBOutlet weak var searchActivity: UIActivityIndicatorView!
     @IBOutlet weak var collectionVIew: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    
-    
     // MARK: - View Lifecycle
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,40 +28,46 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionVIew.dataSource = self
         self.searchActivity.isHidden = true
     }
-    
-    // MARK: - CollectionView methods
-    
+}
+
+extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchingAlbums.count
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FilmCollectionViewCell
         cell.updateCell(album: searchingAlbums[indexPath.row])
+        cell.fileImage.image = nil
+        dataProvider.downloadImage(url: searchingAlbums[indexPath.row].artworkUrl100!)  { image in
+            cell.image  = image
+        }
         return cell
     }
-    
+}
+
+
+extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let albumForSegue = searchingAlbums[indexPath.row]
         let aboutVc = storyboard?.instantiateViewController(withIdentifier: "albumInfo") as! AlbumDetailTableViewController
         aboutVc.albumDetail = albumForSegue
+        aboutVc.dataProvider = dataProvider
         self.navigationController?.pushViewController(aboutVc, animated: true)
         searchBar.resignFirstResponder()
     }
-   
-    
-    
-      // MARK: - SearchView methods
-    
+}
+
+extension MainViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if !searchBar.text!.trimmingCharacters(in: .whitespaces).isEmpty  {
             startActivityView()
             self.searchingAlbums.removeAll()
-            networkManager.fetchSearchingAlbums(albumSearch: searchBar.text!) { (albums) in
+            networkManager.fetchSearchingAlbums(albumSearch: searchBar.text!) { [weak self] (albums) in
+                guard let self = self else { return }
                 if albums.results.isEmpty {
                     self.insertNoResultPage()
                 } else {
@@ -102,10 +104,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.stopActivityView()
         }
     }
+    
     func startActivityView () {
         self.searchActivity.isHidden = false
         self.searchActivity.startAnimating()
     }
+    
     func stopActivityView () {
         self.searchActivity.isHidden = true
         self.searchActivity.stopAnimating()

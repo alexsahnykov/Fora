@@ -15,13 +15,14 @@ class AlbumDetailTableViewController: UITableViewController {
     
     var albumTracks = [Track]()
     var albumDetail:Album!
+    var dataProvider: DataProvider!
     
     
     let loadingView = UIView()
     let spinner = UIActivityIndicatorView()
     let loadingLabel = UILabel()
     
-    @IBOutlet weak var albumImageActivityView: UIActivityIndicatorView!
+
     @IBOutlet weak var albumImage: UIImageView!
     @IBOutlet weak var artistLable: UILabel!
     @IBOutlet weak var albumLable: UILabel!
@@ -58,7 +59,8 @@ class AlbumDetailTableViewController: UITableViewController {
     // MARK: - Fetch
     
     private  func fetchTracks() {
-        networkManager.fetchAlbumTracks(albumID:String(albumDetail.collectionId!)) { tracks in
+        networkManager.fetchAlbumTracks(albumID:String(albumDetail.collectionId!)) { [weak self]  tracks in
+           guard let self = self else { return }
             self.albumTracks = tracks.results
             self.albumTracks.removeFirst()
             DispatchQueue.main.async {
@@ -71,15 +73,10 @@ class AlbumDetailTableViewController: UITableViewController {
     // MARK: - UI
     
     func setAlbumImage() {
-        albumImageActivityView.isHidden = false
-        albumImageActivityView.startAnimating()
-        networkManager.fetchImage(url: albumDetail.artworkUrl100!) { (image) in
-            DispatchQueue.main.async {
+            dataProvider.downloadImage(url: albumDetail.artworkUrl100!)  { [weak self]  image in
+            guard let self = self else { return }
                 self.albumImage.image = image
-                self.albumImageActivityView.isHidden = true
-                self.albumImageActivityView.stopAnimating()
-            }
-        }
+    }
     }
     
     func  setLables (album:Album) {

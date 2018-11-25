@@ -13,6 +13,8 @@
 		C13AB1B121A4BB46002D4D0E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13AB1B021A4BB45002D4D0E /* NetworkManager.swift */; };
 		C13AB1B321A4BB8C002D4D0E /* ModelAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13AB1B221A4BB8C002D4D0E /* ModelAlbum.swift */; };
 		C13AB1BB21A4DD9C002D4D0E /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13AB1BA21A4DD9C002D4D0E /* TrackTableViewCell.swift */; };
+		C142DC4C21AB199D0058E02A /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C142DC4B21AB199C0058E02A /* URLManager.swift */; };
+		C142DC5021AB2B7F0058E02A /* DataProvaider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C142DC4F21AB2B7F0058E02A /* DataProvaider.swift */; };
 		C1C5D56321A459D100D44F7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C5D56221A459D100D44F7F /* AppDelegate.swift */; };
 		C1C5D56821A459D100D44F7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1C5D56621A459D100D44F7F /* Main.storyboard */; };
 		C1C5D56B21A459D200D44F7F /* Fora.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1C5D56921A459D100D44F7F /* Fora.xcdatamodeld */; };
@@ -27,6 +29,8 @@
 		C13AB1B021A4BB45002D4D0E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C13AB1B221A4BB8C002D4D0E /* ModelAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAlbum.swift; sourceTree = "<group>"; };
 		C13AB1BA21A4DD9C002D4D0E /* TrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
+		C142DC4B21AB199C0058E02A /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
+		C142DC4F21AB2B7F0058E02A /* DataProvaider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvaider.swift; sourceTree = "<group>"; };
 		C1C5D55F21A459D100D44F7F /* Fora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C5D56221A459D100D44F7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1C5D56721A459D100D44F7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				C13AB1B021A4BB45002D4D0E /* NetworkManager.swift */,
+				C142DC4B21AB199C0058E02A /* URLManager.swift */,
+				C142DC4F21AB2B7F0058E02A /* DataProvaider.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -185,8 +191,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C142DC5021AB2B7F0058E02A /* DataProvaider.swift in Sources */,
 				C13AB1B121A4BB46002D4D0E /* NetworkManager.swift in Sources */,
 				C13AB1A921A47BDC002D4D0E /* MainViewController.swift in Sources */,
+				C142DC4C21AB199D0058E02A /* URLManager.swift in Sources */,
 				C13AB1B321A4BB8C002D4D0E /* ModelAlbum.swift in Sources */,
 				C13AB1BB21A4DD9C002D4D0E /* TrackTableViewCell.swift in Sources */,
 				C1C5D56321A459D100D44F7F /* AppDelegate.swift in Sources */,
