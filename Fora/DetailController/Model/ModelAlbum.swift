@@ -23,10 +23,3 @@ struct  Albums: Decodable {
     let results: [Album]
 }
 
-struct Track: Decodable {
-    var trackName: String?
-    var trackNumber: Int?
-}
-struct  Tracks: Decodable {
-    let results: [Track]
-}

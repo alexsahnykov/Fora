@@ -15,6 +15,8 @@
 		C13AB1BB21A4DD9C002D4D0E /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13AB1BA21A4DD9C002D4D0E /* TrackTableViewCell.swift */; };
 		C142DC4C21AB199D0058E02A /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C142DC4B21AB199C0058E02A /* URLManager.swift */; };
 		C142DC5021AB2B7F0058E02A /* DataProvaider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C142DC4F21AB2B7F0058E02A /* DataProvaider.swift */; };
+		C142DC5521AB4EE90058E02A /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C142DC5421AB4EE90058E02A /* TrackModel.swift */; };
+		C142DC5921AB4F830058E02A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C142DC5821AB4F830058E02A /* File.swift */; };
 		C1C5D56321A459D100D44F7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C5D56221A459D100D44F7F /* AppDelegate.swift */; };
 		C1C5D56821A459D100D44F7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1C5D56621A459D100D44F7F /* Main.storyboard */; };
 		C1C5D56B21A459D200D44F7F /* Fora.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1C5D56921A459D100D44F7F /* Fora.xcdatamodeld */; };
@@ -31,6 +33,8 @@
 		C13AB1BA21A4DD9C002D4D0E /* TrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
 		C142DC4B21AB199C0058E02A /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
 		C142DC4F21AB2B7F0058E02A /* DataProvaider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvaider.swift; sourceTree = "<group>"; };
+		C142DC5421AB4EE90058E02A /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
+		C142DC5821AB4F830058E02A /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		C1C5D55F21A459D100D44F7F /* Fora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C5D56221A459D100D44F7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1C5D56721A459D100D44F7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,7 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				C13AB1A821A47BDC002D4D0E /* MainViewController.swift */,
-				C13AB1AE21A489E8002D4D0E /* AlbumDetailTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -71,9 +74,7 @@
 		C13AB1B621A4C200002D4D0E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C1C5D56621A459D100D44F7F /* Main.storyboard */,
-				C13AB1AC21A47D02002D4D0E /* FilmCollectionViewCell.swift */,
-				C13AB1BA21A4DD9C002D4D0E /* TrackTableViewCell.swift */,
+				C13AB1AE21A489E8002D4D0E /* AlbumDetailTableViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -86,6 +87,51 @@
 				C142DC4F21AB2B7F0058E02A /* DataProvaider.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		C142DC5121AB4E420058E02A /* DetailController */ = {
+			isa = PBXGroup;
+			children = (
+				C13AB1B421A4C1DC002D4D0E /* Model */,
+				C13AB1B621A4C200002D4D0E /* View */,
+				C13AB1B521A4C1F5002D4D0E /* Controller */,
+			);
+			path = DetailController;
+			sourceTree = "<group>";
+		};
+		C142DC5221AB4EC90058E02A /* SearchController */ = {
+			isa = PBXGroup;
+			children = (
+				C142DC5321AB4ED70058E02A /* Model */,
+				C142DC5621AB4F000058E02A /* VIew */,
+				C142DC5721AB4F0A0058E02A /* Controller */,
+			);
+			path = SearchController;
+			sourceTree = "<group>";
+		};
+		C142DC5321AB4ED70058E02A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C142DC5421AB4EE90058E02A /* TrackModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C142DC5621AB4F000058E02A /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				C13AB1BA21A4DD9C002D4D0E /* TrackTableViewCell.swift */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
+		C142DC5721AB4F0A0058E02A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C13AB1AC21A47D02002D4D0E /* FilmCollectionViewCell.swift */,
+				C142DC5821AB4F830058E02A /* File.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		C1C5D55621A459D100D44F7F = {
@@ -108,9 +154,9 @@
 			isa = PBXGroup;
 			children = (
 				C1C5D56221A459D100D44F7F /* AppDelegate.swift */,
-				C13AB1B421A4C1DC002D4D0E /* Model */,
-				C13AB1B621A4C200002D4D0E /* View */,
-				C13AB1B521A4C1F5002D4D0E /* Controller */,
+				C1C5D56621A459D100D44F7F /* Main.storyboard */,
+				C142DC5221AB4EC90058E02A /* SearchController */,
+				C142DC5121AB4E420058E02A /* DetailController */,
 				C13AB1B721A4C205002D4D0E /* Manager */,
 				C1C5D56C21A459D500D44F7F /* Assets.xcassets */,
 				C1C5D56E21A459D500D44F7F /* LaunchScreen.storyboard */,
@@ -192,8 +238,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C142DC5021AB2B7F0058E02A /* DataProvaider.swift in Sources */,
+				C142DC5921AB4F830058E02A /* File.swift in Sources */,
 				C13AB1B121A4BB46002D4D0E /* NetworkManager.swift in Sources */,
 				C13AB1A921A47BDC002D4D0E /* MainViewController.swift in Sources */,
+				C142DC5521AB4EE90058E02A /* TrackModel.swift in Sources */,
 				C142DC4C21AB199D0058E02A /* URLManager.swift in Sources */,
 				C13AB1B321A4BB8C002D4D0E /* ModelAlbum.swift in Sources */,
 				C13AB1BB21A4DD9C002D4D0E /* TrackTableViewCell.swift in Sources */,
