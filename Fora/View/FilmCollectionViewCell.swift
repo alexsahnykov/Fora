@@ -21,7 +21,7 @@ class FilmCollectionViewCell: UICollectionViewCell {
         activityView.startAnimating()
         self.activityView.isHidden = false
         guard let url = album.artworkUrl100 else {return}
-        networkManager.downloadImage(url: url) { (image) in
+        networkManager.fetchImage(url: url) { (image) in
             DispatchQueue.main.async {
                 self.fileImage.image = image
                 self.activityView.stopAnimating()

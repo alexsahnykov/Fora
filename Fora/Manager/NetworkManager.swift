@@ -13,15 +13,25 @@ import UIKit
 
 
 
-struct Endpoint {
+struct SearchUrl {
     let path: String
     let queryItems: [URLQueryItem]
     
 }
 
-extension Endpoint {
-    static func searchAlbums(albumName query: String) -> Endpoint {
-        return Endpoint(
+extension SearchUrl {
+  
+    var url: URL? {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "itunes.apple.com"
+        components.path = path
+        components.queryItems = queryItems
+        return components.url
+    }
+    
+    static func getSearchingAlbumsURL(withAlbumName query: String) -> SearchUrl {
+        return SearchUrl(
             path: "/search",
             queryItems: [
                 URLQueryItem(name: "entity", value: "album"),
@@ -30,8 +40,9 @@ extension Endpoint {
                 URLQueryItem(name: "term", value: query)]
         )
     }
-    static func getAlbumTracks(albumId query: String) -> Endpoint {
-        return Endpoint(
+    
+    static func getAlbumTracksURL(withAlbumId query: String) -> SearchUrl {
+        return SearchUrl(
             path: "/lookup",
             queryItems: [
                 URLQueryItem(name: "entity", value: "song"),
@@ -40,17 +51,6 @@ extension Endpoint {
     }
 }
 
-extension Endpoint {
-    var url: URL? {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "itunes.apple.com"
-        components.path = path
-        components.queryItems = queryItems
-        
-        return components.url
-    }
-}
 
 class networkManager {
     private init() {}
@@ -70,8 +70,9 @@ class networkManager {
     }
     
     
-    static func fetchSearchingAlbums(endpoint: Endpoint, completion: @escaping (_ albums: Albums)->()) {
-        guard let url = endpoint.url else { return }
+    static func fetchSearchingAlbums(albumSearch: String, completion: @escaping (_ albums: Albums)->()) {
+        let searchUrl = SearchUrl.getSearchingAlbumsURL(withAlbumName: albumSearch).url
+        guard let url = searchUrl else { return }
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             guard let data = data else { return }
             do {
@@ -83,8 +84,9 @@ class networkManager {
             }.resume()
     }
     
-    static func fetchAlbumTracks(endpoint: Endpoint, completion: @escaping (_ tracks: Tracks)->()) {
-        guard let url = endpoint.url else { return }
+    static func fetchAlbumTracks(albumID: String, completion: @escaping (_ tracks: Tracks)->()) {
+        let searchUrl = SearchUrl.getAlbumTracksURL(withAlbumId: albumID).url
+        guard let url = searchUrl else { return }
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             guard let data = data else { return }
             do {
@@ -97,7 +99,7 @@ class networkManager {
     }
     
     
-    static func downloadImage(url: String, completion: @escaping (_ image: UIImage)->()) {
+    static func fetchImage(url: String, completion: @escaping (_ image: UIImage)->()) {
         guard let url = URL(string: url) else {
             let image = UIImage(named: "NoAlbumImage")
             completion(image!)

@@ -57,21 +57,19 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
    
     
-
     
       // MARK: - SearchView methods
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if !searchBar.text!.trimmingCharacters(in: .whitespaces).isEmpty  {
-            self.searchActivity.isHidden = false
-            self.searchActivity.startAnimating()
+            startActivityView()
             self.searchingAlbums.removeAll()
-            networkManager.fetchSearchingAlbums(endpoint: .searchAlbums(albumName: searchBar.text!)) { (albums) in
+            networkManager.fetchSearchingAlbums(albumSearch: searchBar.text!) { (albums) in
                 if albums.results.isEmpty {
-                    self.noResultPage()
+                    self.insertNoResultPage()
                 } else {
-                    self.searchResult(albumsSearchResult: albums)
+                    self.getSearchResult(albumsSearchResult: albums)
                 }
             }
         } else {
@@ -80,10 +78,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         searchBar.resignFirstResponder()
     }
     
-    func  noResultPage() {
+    func  insertNoResultPage() {
         DispatchQueue.main.async {
-            self.searchActivity.isHidden = true
-            self.searchActivity.stopAnimating()
+            self.stopActivityView()
             self.collectionVIew.reloadData()
             self.collectionVIew.setContentOffset(CGPoint(x:0,y:0), animated: false)
             let noDataLablePosition = CGRect(x: 0,y: 0,width: self.collectionVIew.bounds.size.width,height: self.collectionVIew.bounds.size.height)
@@ -96,14 +93,21 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    func searchResult(albumsSearchResult:Albums)  {
+    func getSearchResult(albumsSearchResult:Albums)  {
         self.searchingAlbums = albumsSearchResult.results.sorted(by: {$0.collectionName! < $1.collectionName!})
         DispatchQueue.main.async {
             self.collectionVIew.backgroundView = nil
             self.collectionVIew.reloadData()
             self.collectionVIew.setContentOffset(CGPoint(x:0,y:0), animated: false)
-            self.searchActivity.isHidden = true
-            self.searchActivity.stopAnimating()
+            self.stopActivityView()
         }
+    }
+    func startActivityView () {
+        self.searchActivity.isHidden = false
+        self.searchActivity.startAnimating()
+    }
+    func stopActivityView () {
+        self.searchActivity.isHidden = true
+        self.searchActivity.stopAnimating()
     }
 }
