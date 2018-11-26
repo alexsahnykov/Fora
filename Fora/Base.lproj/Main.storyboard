@@ -13,7 +13,8 @@
         <!--Navigation Controller-->
         <scene sceneID="jdj-9q-udD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2wU-1Z-mvM" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oUy-ZW-qai" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="navigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2wU-1Z-mvM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bZV-be-m8V">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -24,7 +25,6 @@
                         <segue destination="JFT-HL-k99" kind="relationship" relationship="rootViewController" id="Lwk-uZ-SwN"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oUy-ZW-qai" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="866.39999999999998" y="124.58770614692655"/>
         </scene>
@@ -107,11 +107,12 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="cell" id="GOa-vn-grg">
+                                    <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>
-                                    <outlet property="dataSource" destination="JFT-HL-k99" id="rtY-XB-tlT"/>
-                                    <outlet property="delegate" destination="JFT-HL-k99" id="eyz-g7-zOe"/>
+                                    <outlet property="dataSource" destination="v0D-P0-cnX" id="dLs-mH-yVf"/>
+                                    <outlet property="delegate" destination="v0D-P0-cnX" id="LUC-aS-yjs"/>
                                 </connections>
                             </collectionView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="aIE-Nl-Zn1">
@@ -135,18 +136,20 @@
                     <navigationItem key="navigationItem" title="Albums" id="wJ4-0U-RDd"/>
                     <connections>
                         <outlet property="collectionVIew" destination="u0Y-j8-7YR" id="PWK-4F-A5b"/>
+                        <outlet property="dataProvider" destination="v0D-P0-cnX" id="xHU-iC-Tel"/>
                         <outlet property="searchActivity" destination="aIE-Nl-Zn1" id="fJG-6g-cd4"/>
                         <outlet property="searchBar" destination="yXg-ba-Rct" id="Sno-cl-gPP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R4v-eq-tUO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="v0D-P0-cnX" customClass="DataProviderSearchView" customModule="Fora" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1746.4000000000001" y="123.68815592203899"/>
         </scene>
         <!--Album Detail Table View Controller-->
         <scene sceneID="4AJ-UT-L91">
             <objects>
-                <tableViewController storyboardIdentifier="albumInfo" id="gNo-sF-EMF" customClass="AlbumDetailTableViewController" customModule="Fora" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="albumInfo" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gNo-sF-EMF" customClass="AlbumDetailTableViewController" customModule="Fora" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="auf-DR-1y1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -243,8 +246,8 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="gNo-sF-EMF" id="izi-8F-mvT"/>
-                            <outlet property="delegate" destination="gNo-sF-EMF" id="z20-u5-ClK"/>
+                            <outlet property="dataSource" destination="FEn-eN-61U" id="TWT-jl-4Hd"/>
+                            <outlet property="delegate" destination="FEn-eN-61U" id="2cT-pb-wnl"/>
                         </connections>
                     </tableView>
                     <connections>
@@ -252,10 +255,12 @@
                         <outlet property="albumLable" destination="sfF-8E-BUS" id="wXb-rd-ubk"/>
                         <outlet property="artistLable" destination="gvT-gK-few" id="NLx-4X-FIl"/>
                         <outlet property="countryLable" destination="XVN-1o-dpX" id="AjS-II-ch6"/>
+                        <outlet property="dataProvider" destination="FEn-eN-61U" id="KQx-7J-ARY"/>
                         <outlet property="dateLable" destination="cPv-AZ-zDH" id="Y9I-5U-wYE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zn0-4E-oI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="FEn-eN-61U" customClass="DataProviderDetailView" customModule="Fora" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="2564" y="123.68815592203899"/>
         </scene>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DataProvider {
+class CacheImage {
     
     var imageCache = NSCache<NSString, UIImage>()
     

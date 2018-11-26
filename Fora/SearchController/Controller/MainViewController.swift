@@ -12,9 +12,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    var searchingAlbums =  [Album]()
-    let dataProvider = DataProvider()
-    
+    @IBOutlet var dataProvider: DataProviderSearchView!
     @IBOutlet weak var searchActivity: UIActivityIndicatorView!
     @IBOutlet weak var collectionVIew: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -24,60 +22,33 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        collectionVIew.delegate = self
-        collectionVIew.dataSource = self
         self.searchActivity.isHidden = true
     }
 }
 
-extension MainViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchingAlbums.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FilmCollectionViewCell
-        cell.updateCell(album: searchingAlbums[indexPath.row])
-        cell.fileImage.image = nil
-        dataProvider.downloadImage(url: searchingAlbums[indexPath.row].artworkUrl100!)  { image in
-            cell.image  = image
-        }
-        return cell
-    }
-}
-
-
-extension MainViewController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let albumForSegue = searchingAlbums[indexPath.row]
-        let aboutVc = storyboard?.instantiateViewController(withIdentifier: "albumInfo") as! AlbumDetailTableViewController
-        aboutVc.albumDetail = albumForSegue
-        aboutVc.dataProvider = dataProvider
-        self.navigationController?.pushViewController(aboutVc, animated: true)
-        searchBar.resignFirstResponder()
-    }
-}
-
+    // MARK: - SearchBAr methods
 extension MainViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if !searchBar.text!.trimmingCharacters(in: .whitespaces).isEmpty  {
             startActivityView()
-            self.searchingAlbums.removeAll()
-            networkManager.fetchSearchingAlbums(albumSearch: searchBar.text!) { [weak self] (albums) in
-                guard let self = self else { return }
-                if albums.results.isEmpty {
+            self.getAlbums(albumName: searchBar.text!)
+        }
+    }
+    
+    func getAlbums(albumName: String) {
+        self.dataProvider.dataManager.searchingAlbums.removeAll()
+        networkManager.fetchSearchingAlbums(albumSearch: albumName) { [weak self] (albums) in
+            guard let self = self else { return }
+            self.setSearchResult(albumsSearchResult: albums)
+            DispatchQueue.main.async {
+                if  self.dataProvider.dataManager.searchingAlbums.isEmpty  {
                     self.insertNoResultPage()
                 } else {
-                    self.getSearchResult(albumsSearchResult: albums)
+                    self.collectionVIew.reloadData()
                 }
             }
-        } else {
-            return
         }
-        searchBar.resignFirstResponder()
     }
     
     func  insertNoResultPage() {
@@ -95,8 +66,8 @@ extension MainViewController: UISearchBarDelegate {
         }
     }
     
-    func getSearchResult(albumsSearchResult:Albums)  {
-        self.searchingAlbums = albumsSearchResult.results.sorted(by: {$0.collectionName! < $1.collectionName!})
+    func setSearchResult(albumsSearchResult:Albums)  {
+        self.dataProvider.dataManager.searchingAlbums = albumsSearchResult.results.sorted(by: {$0.collectionName! < $1.collectionName!})
         DispatchQueue.main.async {
             self.collectionVIew.backgroundView = nil
             self.collectionVIew.reloadData()
